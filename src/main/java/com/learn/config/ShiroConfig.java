@@ -11,6 +11,9 @@ import java.util.Map;
 
 /**
  * shiro配置类
+ *
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @Configuration
 public class ShiroConfig {
@@ -32,14 +35,14 @@ public class ShiroConfig {
         // 拦截
         Map<String, String> filterMap = new LinkedHashMap<>();
         // 授权
-        //filterMap.put("/user/add", "perms[user:add]");
-        //filterMap.put("/user/*", "authc");
+        // filterMap.put("/user/add", "perms[user:add]");
+        // filterMap.put("/user/*", "authc");
         bean.setFilterChainDefinitionMap(filterMap);
 
         // 设置登录的请求
-        //bean.setLoginUrl("/login");
+        // bean.setLoginUrl("/login");
         // 未授权页面
-        //bean.setUnauthorizedUrl("/noauth");
+        // bean.setUnauthorizedUrl("/noauth");
 
         return bean;
     }

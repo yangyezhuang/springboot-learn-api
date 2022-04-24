@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
+ */
 @Service
 //@CacheConfig(cacheNames = "course")
 public class ShuffleService {
@@ -16,8 +20,12 @@ public class ShuffleService {
     @Autowired
     private ShuffleMapper shuffleMapper;
 
+    /**
+     * 获取全部轮播图url
+     * @return
+     */
     //@Cacheable()
-    public List<Shuffle> queryAll() {
+    public List<Shuffle> listShuffle() {
         return shuffleMapper.queryAll();
     }
 }

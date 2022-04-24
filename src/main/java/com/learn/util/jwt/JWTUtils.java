@@ -25,7 +25,7 @@ public class JWTUtils {
     public static String getToken(User u) {
 
         Calendar instance = Calendar.getInstance();
-        //默认令牌过期时间7天
+        // 默认令牌过期时间7天
         instance.add(Calendar.DATE, 7);
 
         JWTCreator.Builder builder = JWT.create();
@@ -41,16 +41,16 @@ public class JWTUtils {
     /**
      * 验证token合法性 成功返回token
      */
-    //public static DecodedJWT verify(String token) throws MyException {
+    // public static DecodedJWT verify(String token) throws MyException {
     public static DecodedJWT verify(String token) {
-        //if(StringUtils.isEmpty(token)){
+        // if(StringUtils.isEmpty(token)){
         //    throw new MyException("token不能为空");
-        //}
+        // }
         if (StringUtils.isEmpty(token)) {
             System.out.println("token不能为空");
         }
 
-        //获取登录用户真正的密码假如数据库查出来的是123456
+        // 获取登录用户真正的密码假如数据库查出来的是123456
         String password = "admin";
         JWTVerifier build = JWT.require(Algorithm.HMAC256(password)).build();
         return build.verify(token);

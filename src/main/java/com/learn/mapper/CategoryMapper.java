@@ -6,11 +6,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-/**
- * @Description: 查询课程类别
- * @Date: 2022/3/14 11:04
- * @Author: yyz
- */
+
 @Mapper
 public interface CategoryMapper {
 

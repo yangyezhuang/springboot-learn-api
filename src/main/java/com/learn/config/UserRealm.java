@@ -14,6 +14,9 @@ import com.learn.service.UserService;
 
 /**
  * 自定义的 UserRealm，继承 AuthorizingRealm
+ *
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @Slf4j
 public class UserRealm extends AuthorizingRealm {
@@ -33,16 +36,15 @@ public class UserRealm extends AuthorizingRealm {
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.addStringPermission("user:add");
-
         // 拿到当前登录对象
         Subject subject = SecurityUtils.getSubject();
-        User currentUser = (User) subject.getPrincipal();//拿到User对象
-
+        // 拿到 User对象
+        User currentUser = (User) subject.getPrincipal();
         // 设置当前用户权限
         info.addStringPermission(currentUser.getEmail());
 
         return info;
-        //return null;
+        // return null;
     }
 
     /**
@@ -59,17 +61,17 @@ public class UserRealm extends AuthorizingRealm {
         UsernamePasswordToken userToken = (UsernamePasswordToken) token;
         // 从数据库中查询用户名，密码
         User user = userService.selectByEmail(userToken.getUsername());
-        //log.info("数据库查询用户名，密码：" + user);
 
         if (user == null) {
-            return null; // 抛出异常 UnknownAccountException
+            // 抛出异常 UnknownAccountException
+            return null;
         }
 
         // 可以加密：MD5，MD5盐值加密
         // 密码认证，shiro做，加密了，无需用户操作
-        //return new SimpleAuthenticationInfo(user, user.getPassword(), "");
+        // return new SimpleAuthenticationInfo(user, user.getPassword(), "");
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), "");
-        log.info("info" + info);
+        // log.info("info" + info);
 
         return info;
     }

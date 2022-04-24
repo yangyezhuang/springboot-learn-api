@@ -54,8 +54,8 @@ public interface UserMapper {
 
 
     // 检查用户是否有该课程
-    @Select("select count(*) from user_like_tbl WHERE uid=#{uid} and course_id=#{course_id};")
-    int isLike(int uid, int course_id);
+    @Select("select count(*) from user_like_tbl WHERE uid=#{uid} and course_id=#{courseId};")
+    int isLike(int uid, int courseId);
 
 
     // 添加用户课程

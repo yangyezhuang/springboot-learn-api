@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @Description: BehaviorController
- * @Date: 2022/3/13 17:31
- * @Created: by yyz
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @Slf4j
 @RestController

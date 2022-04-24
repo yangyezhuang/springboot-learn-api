@@ -10,26 +10,45 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
+ */
 @Slf4j
 @Service
 public class CommentService {
     @Autowired
     private CommentMapper commentMapper;
 
-    // 获取评论
-    public List<Comment> allComments() {
+
+    /**
+     * 获取全部评论
+     *
+     * @return
+     */
+    public List<Comment> listComments() {
         return commentMapper.allComments();
     }
 
 
-    // 获取评论
+    /**
+     * 获取评论
+     *
+     * @param course_id
+     * @return
+     */
     public List<Comment> getComment(int course_id) {
         return commentMapper.getComment(course_id);
     }
 
 
-    // 发表评论
-    public int addComment(Comment comment) {
+    /**
+     * 发表评论
+     *
+     * @param comment
+     * @return
+     */
+    public int insertComment(Comment comment) {
         int uid = comment.getUid();
         String username = comment.getUsername();
         int course_id = comment.getCourse_id();
@@ -49,14 +68,24 @@ public class CommentService {
     }
 
 
-    // 发表评论
-    public int delComment(double comment_id) {
+    /**
+     * 删除评论
+     *
+     * @param comment_id
+     * @return
+     */
+    public int deleteComment(double comment_id) {
         return commentMapper.delComment(comment_id);
     }
 
 
-    // 获取用户评论总数
-    public int commentCount(int uid) {
+    /**
+     * 获取用户评论总数
+     *
+     * @param uid
+     * @return
+     */
+    public int countComments(int uid) {
         return commentMapper.commentCount(uid);
     }
 }

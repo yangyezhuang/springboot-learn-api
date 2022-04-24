@@ -3,7 +3,7 @@
 <p align="center">
     <a><img src="https://img.shields.io/badge/java-1.8+-green"></a>
     <a><img src="https://img.shields.io/badge/springboot-2.0-green"></a>
-    <a><img src="https://img.shields.io/badge/java-1.8+-green"></a>
+    <a><img src="https://img.shields.io/badge/mysql-5.8-green"></a>
 </p>
 
 

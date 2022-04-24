@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Mapper
 public interface BehaviorMapper {
 

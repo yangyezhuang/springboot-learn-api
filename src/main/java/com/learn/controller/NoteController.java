@@ -2,41 +2,63 @@ package com.learn.controller;
 
 import com.learn.model.Note;
 import com.learn.service.NoteService;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * @Description: TODO
- * @Date: 2022/4/7 13:58
- * @Author: Yang Yezhuang
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @RestController
-@RequestMapping("/note")
+@RequestMapping("/notes")
 public class NoteController {
 
     @Autowired
     NoteService noteService;
 
-    @PostMapping("/add")
-    public int addNote(@RequestBody Note note) {
-        return noteService.addNote(note);
+    /**
+     * 添加笔记
+     *
+     * @param note
+     * @return
+     */
+    @PostMapping()
+    public int insertNote(@RequestBody Note note) {
+        return noteService.insertNote(note);
     }
 
-    @DeleteMapping("/del/{note_id}")
-    public int addNote(@PathVariable("note_id") Long note_id) {
-        return noteService.delNote(note_id);
+    /**
+     * 删除笔记
+     *
+     * @param note_id
+     * @return
+     */
+    @DeleteMapping("/{note_id}")
+    public int deleteNote(@PathVariable("note_id") Long note_id) {
+        return noteService.deleteNote(note_id);
     }
 
+    /**
+     * 查询用户所有笔记
+     *
+     * @param uid
+     * @return
+     */
     @GetMapping("/user/{uid}")
-    public List<Note> addNote(@PathVariable("uid") int uid) {
+    public List<Note> listNotes(@PathVariable("uid") int uid) {
         return noteService.selectNote(uid);
     }
 
+    /**
+     * 用户笔记数量
+     *
+     * @param uid
+     * @return
+     */
     @GetMapping("/total/user/{uid}")
-    public int noteCount(@PathVariable("uid") int uid) {
-        return noteService.noteCount(uid);
+    public int countNotes(@PathVariable("uid") int uid) {
+        return noteService.countNotes(uid);
     }
 }

@@ -16,9 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * @Description: CourseController
- * @Date: 2022/3/13 17:31
- * @Created: by yyz
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @Slf4j
 @RestController
@@ -34,10 +33,9 @@ public class CourseController {
      *
      * @return
      */
-    @GetMapping("/all")
-    public List<Course> findAll() {
-        List<Course> courses = courseService.findAll();
-        //log.info("全部课程：" + courses.toString());
+    @GetMapping()
+    public List<Course> listCourse() {
+        List<Course> courses = courseService.listCourses();
 
         // redis存取
         // stringRedisTemplate.opsForValue().set("courses", String.valueOf(courses));
@@ -53,9 +51,8 @@ public class CourseController {
      * @return
      */
     @GetMapping("/hot")
-    public List<Course> hotCourses() {
-        List<Course> hotCourses = courseService.hotCourses();
-        //log.info("热门课程：" + hotCourses);
+    public List<Course> listHotCourses() {
+        List<Course> hotCourses = courseService.listHotCourses();
 
         return hotCourses;
     }
@@ -67,9 +64,9 @@ public class CourseController {
      * @return
      */
     @PostMapping("/add")
-    public int addCourse(@RequestBody Course course) {
+    public int insertCourse(@RequestBody Course course) {
 
-        return courseService.addCourse(course);
+        return courseService.insertCourse(course);
     }
 
 
@@ -77,15 +74,12 @@ public class CourseController {
      * 删除课程
      * TODO
      *
-     * @param jsonParam
+     * @param id
      * @return
      */
-    @DeleteMapping("/del")
-    public Result delCourse(@RequestBody JSONObject jsonParam) {
-        String course_ID = jsonParam.get("courseID").toString();
-        int courseID = Integer.parseInt(course_ID);
-
-        courseService.delCouse(courseID);
+    @DeleteMapping("/{id}")
+    public Result deleteCourse(@PathVariable("id") int id) {
+        courseService.deleteCourse(id);
         return Result.success(ResultCode.SUCCESS);
     }
 
@@ -97,12 +91,13 @@ public class CourseController {
      * @return
      */
     @GetMapping("/search/{keyword}")
-    public List<Course> search(@PathVariable("keyword") String keyword) {
-        List<Course> aboutCourses = courseService.search(keyword);
-        //log.info("关键词：" + keyword + "\t相关课程：" + aboutCourses);
+    public List<Course> listSearchCourses(@PathVariable("keyword") String keyword) {
+        List<Course> aboutCourses = courseService.listSearchCourses(keyword);
+        // log.info("关键词：" + keyword + "\t相关课程：" + aboutCourses);
 
         return aboutCourses;
     }
+
 
     /**
      * 根据分类获取课程
@@ -111,8 +106,8 @@ public class CourseController {
      * @return
      */
     @GetMapping("/category/{type}")
-    public List<Course> category(@PathVariable("type") String type) {
-        return courseService.category(type);
+    public List<Course> listCategoryCourses(@PathVariable("type") String type) {
+        return courseService.listCategories(type);
     }
 
 
@@ -121,10 +116,9 @@ public class CourseController {
      *
      * @return
      */
-    @GetMapping("/detail/{course_id}")
-    public List<Detail> getDetail(@PathVariable("course_id") int course_id) {
+    @GetMapping("/{course_id}")
+    public List<Detail> listDetail(@PathVariable("course_id") int course_id) {
         List<Detail> detail = courseService.getDetail(course_id);
-        //log.info("课程详情：" + detail);
 
         return detail;
     }
@@ -136,9 +130,8 @@ public class CourseController {
      * @return
      */
     @GetMapping("/chapter/{course_id}")
-    public List<Chapter> getChapterList(@PathVariable("course_id") int course_id) {
-        List<Chapter> chapter = courseService.getChapterList(course_id);
-        //log.info("章节列表：" + chapter);
+    public List<Chapter> listChapter(@PathVariable("course_id") int course_id) {
+        List<Chapter> chapter = courseService.listChapters(course_id);
 
         return chapter;
     }
@@ -154,7 +147,6 @@ public class CourseController {
                             @PathVariable("chapter_id") String chapter_id) {
 
         Chapter chapter = courseService.getVideo(course_id, chapter_id);
-        //log.info("视频资源：" + chapter);
 
         return chapter;
     }

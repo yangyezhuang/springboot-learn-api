@@ -10,9 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Description: TODO
- * @Date: 2022/4/8 16:18
- * @Author: Yang Yezhuang
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @Service
 public class AdviceService {
@@ -20,29 +19,45 @@ public class AdviceService {
     @Autowired
     private AdviceMapper adviceMapper;
 
-    public int addAdvice(Advice advice) {
-        Long id = System.currentTimeMillis() / 1000; // 10位数的时间戳
-
+    /**
+     * 添加建议
+     *
+     * @param advice
+     * @return
+     */
+    public int insertAdvice(Advice advice) {
+        // 10位数的时间戳
+        Long id = System.currentTimeMillis() / 1000;
         String title = advice.getTitle();
         String content = advice.getContent();
         String name = advice.getName();
         String phone = advice.getPhone();
 
         // 生成时间
-        String time = "";
+        String time_ = "";
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        time = dateFormat.format(date);
+        time_ = dateFormat.format(date);
 
-
-        return adviceMapper.addAdvice(id, title, content, name, phone, time);
+        return adviceMapper.addAdvice(id, title, content, name, phone, time_);
     }
 
-    public int delAdvice(Long id) {
+    /**
+     * 删除建议
+     *
+     * @param id
+     * @return
+     */
+    public int deleteAdvice(Long id) {
         return adviceMapper.delAdvice(id);
     }
 
-    public List<Advice> queryAll() {
+    /**
+     * 获取全部建议
+     *
+     * @return
+     */
+    public List<Advice> listAdvices() {
         return adviceMapper.queryAll();
     }
 }

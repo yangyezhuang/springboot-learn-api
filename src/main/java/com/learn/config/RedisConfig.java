@@ -12,6 +12,9 @@ import java.time.Duration;
 
 /**
  * Redis配置类
+ *
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @Configuration
 public class RedisConfig {

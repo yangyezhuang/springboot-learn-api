@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 /**
- * @Description: AccountController
- * @Date: 2022/3/13 17:31
- * @Created: by yyz
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @Slf4j
 @RestController
@@ -49,9 +48,9 @@ public class AccountController {
             subject.login(token);
             User user = (User) subject.getPrincipal();
             // log.info("subject.getPrincipal:" + subject.getPrincipal());
-            String uToken = JWTUtils.getToken(user);    //获取token
-            //log.info("token=>" + uToken);
-            //返回给客户端保存
+            // 获取 token
+            String uToken = JWTUtils.getToken(user);
+            // 返回给客户端保存
             return Result.success(uToken);
         } catch (UnknownAccountException e) {
             log.info("账号错误");
@@ -61,7 +60,6 @@ public class AccountController {
             return Result.failure(ResultCode.FAILURE, "密码错误");
         }
     }
-
 
 
     /**
@@ -83,20 +81,19 @@ public class AccountController {
     @PostMapping("/sendVerifyCode/{email}")
     public String sendEmail(@PathVariable("email") String email, HttpSession httpSession) {
         mailService.sendVerifyCode(email, httpSession);
-        return "sucess";
+        return "success";
     }
 
 
     /**
-     * 修改密码
-     * TODO
+     * 修改密码 TODO
      *
      * @param user
      * @return
      */
     @PutMapping(value = "/user/{username}")
     public Result changePassword(@RequestBody User user) {
-        userService.updatePasswd(user.getEmail(), user.getPassword());
+        userService.updatePasswd(user);
 
         return Result.success();
     }

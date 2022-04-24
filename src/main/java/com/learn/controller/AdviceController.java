@@ -8,30 +8,47 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @Description: advice
- * @Date: 2022/4/8 16:24
- * @Author: Yang Yezhuang
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @RestController
-@RequestMapping("/advice")
+@RequestMapping("/advices")
 public class AdviceController {
 
     @Autowired
     private AdviceService adviceService;
 
-    @PostMapping("/add")
-    public int addAdvice(@RequestBody Advice advice) {
-        System.out.println(advice.toString());
-        return adviceService.addAdvice(advice);
-    }
-
-    @DeleteMapping("/del/{id}")
-    public int delAdvice(@PathVariable("id") Long id) {
-        return adviceService.delAdvice(id);
-    }
-
-    @GetMapping("/all")
+    /**
+     * 获取全部建议
+     *
+     * @return
+     */
+    @GetMapping()
     public List<Advice> selectAdvice() {
-        return adviceService.queryAll();
+        return adviceService.listAdvices();
     }
+
+
+    /**
+     * 添加建议
+     *
+     * @param advice
+     * @return
+     */
+    @PostMapping()
+    public int insertAdvice(@RequestBody Advice advice) {
+        return adviceService.insertAdvice(advice);
+    }
+
+    /**
+     * 删除建议
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/{id}")
+    public int deleteAdvice(@PathVariable("id") Long id) {
+        return adviceService.deleteAdvice(id);
+    }
+
 }

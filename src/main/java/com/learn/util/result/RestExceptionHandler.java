@@ -12,6 +12,9 @@ import javax.security.auth.message.AuthException;
  * <p>
  * controller中接口发生Exception异常时，就会进入到Execption方法中进行捕获，
  * 将杂乱的异常信息，转换成指定格式后交给ResponseAdvice方法进行统一格式封装并返回给前端。
+ *
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @Slf4j
 @RestControllerAdvice

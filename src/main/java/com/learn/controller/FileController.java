@@ -10,9 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 
 /**
- * @Description: FileController
- * @Date: 2022/3/13 17:31
- * @Created: by yyz
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @RestController
 public class FileController {

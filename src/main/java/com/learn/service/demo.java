@@ -7,6 +7,8 @@ import java.util.TreeMap;
 
 /**
  * 用户画像推荐算法
+ *
+ * @date: 2022/3/13
  */
 public class demo {
 
@@ -90,9 +92,8 @@ public class demo {
 
 
     /**
-     * @Author Ragty
-     * @Description 随机科目
-     * @Date 11:07 2019/4/8
+     * 随机科目
+     * @date 11:07 2019/4/8
      **/
     public static String Random(String[] keys, String result, Integer finalSize) {
         for (int i = 0; i < finalSize; i++) {
@@ -102,9 +103,8 @@ public class demo {
     }
 
     /**
-     * @Author Ragty
-     * @Description 比较器（按值排序,相同的随机取值）
-     * @Date 10:38 2019/4/9
+     * 比较器（按值排序,相同的随机取值）
+     * @date 10:38 2019/4/9
      **/
     public static class MapValueComparator<T extends Comparable<T>> implements Comparator<String> {
         private Map<String, T> map = null;

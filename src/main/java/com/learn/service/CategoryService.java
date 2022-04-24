@@ -8,9 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @Description: 查询课程类别
- * @Date: 2022/3/14 11:05
- * @Author: yyz
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @Service
 public class CategoryService {
@@ -19,13 +18,12 @@ public class CategoryService {
     private CategoryMapper categoryMapper;
 
 
-    public List<Category> queryAll() {
+    public List<Category> listCategories() {
         return categoryMapper.queryAll();
     }
 
 
-
-    public List<Category> queryLabel() {
+    public List<Category> listLabels() {
         return categoryMapper.queryLabel();
     }
 }

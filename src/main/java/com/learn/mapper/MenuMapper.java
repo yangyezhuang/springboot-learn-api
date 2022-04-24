@@ -9,6 +9,7 @@ import java.util.List;
 @Mapper
 public interface MenuMapper {
 
-    @Select("select * from menus_tbl;")
+    @Select("select * from menu_tbl;")
     List<Menu> menu();
+
 }

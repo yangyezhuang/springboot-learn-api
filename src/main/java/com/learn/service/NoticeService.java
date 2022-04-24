@@ -10,6 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
+ */
 @Slf4j
 @Service
 public class NoticeService {
@@ -23,7 +27,7 @@ public class NoticeService {
      *
      * @return
      */
-    public Notice queryOne() {
+    public Notice getNewNotice() {
         return noticeMapper.queryOne();
     }
 
@@ -33,7 +37,7 @@ public class NoticeService {
      *
      * @return
      */
-    public List<Notice> queryAll() {
+    public List<Notice> listNotices() {
         return noticeMapper.queryAll();
     }
 
@@ -65,7 +69,7 @@ public class NoticeService {
      * @param id
      * @return
      */
-    public int delNotice(long id) {
+    public int deleteNotice(long id) {
         return noticeMapper.delNotice(id);
     }
 }

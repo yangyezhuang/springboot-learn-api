@@ -2,6 +2,8 @@ package com.learn.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * 菜单实体类
  */
@@ -9,8 +11,10 @@ import lombok.Data;
 public class Menu {
 
     private int id;
-    private String authName;
-    private String childrenPath;
     private int pid;
+    private String name;
+    private String path;
+    private String icon;
+    private List<Menu> children;
 
 }

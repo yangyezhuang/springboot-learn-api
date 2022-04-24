@@ -1,21 +1,24 @@
 package com.learn.util.result;
 
+/**
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
+ */
 public enum ResultCode {
 
     SUCCESS(1, "成功"),
     FAILURE(0, "失败"),
     SERVER_BUSY(503, "服务器正忙，请稍后再试!");
 
-    //@Getter
+    // @Getter
     private int code;
-    //@Getter
+    // @Getter
     private String message;
 
     ResultCode(int code, String message) {
         this.code = code;
         this.message = message;
     }
-
 
 
     public int getCode() {

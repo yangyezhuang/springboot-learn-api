@@ -12,33 +12,48 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * @Description: NoticeController
- * @Date: 2022/3/13 17:31
- * @Created: by yyz
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @Slf4j
 @RestController
-@RequestMapping("/notice")
+@RequestMapping("/notices")
 public class NoticeController {
 
     @Autowired
     private NoticeService noticeService;
 
 
+    /**
+     * 查找最新公告
+     *
+     * @return
+     */
     @GetMapping("/new")
-    public Notice queryOne() {
-        return noticeService.queryOne();
+    public Notice getNewNotice() {
+        return noticeService.getNewNotice();
     }
 
-    @GetMapping("/all")
-    public List<Notice> queryAll() {
-        return noticeService.queryAll();
+
+    /**
+     * 查找全部公告
+     *
+     * @return
+     */
+    @GetMapping()
+    public List<Notice> listNotices() {
+        return noticeService.listNotices();
     }
 
-    @PostMapping("/add")
-    //public int insertNotice(@RequestBody Notice notice) {
-    //    log.info(notice.getTitle());
 
+    /**
+     * 添加公告
+     *
+     * @param notice
+     * @param bindingResult
+     * @return
+     */
+    @PostMapping()
     public String insertNotice(@RequestBody @Valid Notice notice, BindingResult bindingResult) {
         log.info(notice.getTitle() + "" + notice.getText());
         if (bindingResult.hasErrors()) {
@@ -47,19 +62,23 @@ public class NoticeController {
             for (ObjectError allError : allErrors) {
                 stringBuffer.append(allError.getDefaultMessage() + "，");
             }
-
-            log.info(stringBuffer.toString());
+            // log.info(stringBuffer.toString());
             return stringBuffer.toString();
         } else {
             return String.valueOf(noticeService.insertNotice(notice));
         }
-
-        //return noticeService.insertNotice(notice);
     }
 
-    @DeleteMapping("/del/{id}")
-    public String delNotice(@PathVariable("id") long id) {
-        noticeService.delNotice(id);
+
+    /**
+     * 删除公告
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/{id}")
+    public String deleteNotice(@PathVariable("id") long id) {
+        noticeService.deleteNotice(id);
         return "删除成功";
     }
 

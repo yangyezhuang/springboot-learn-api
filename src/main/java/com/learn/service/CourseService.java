@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
+ */
 @Slf4j
 @Service
 @CacheConfig(cacheNames = "course")
@@ -21,62 +25,105 @@ public class CourseService {
     private CourseMapper courseMapper;
 
 
-    // 首页热门课程
-    public List<Course> hotCourses() {
+    /**
+     * 首页热门课程
+     *
+     * @return
+     */
+    public List<Course> listHotCourses() {
         return courseMapper.hotCourses();
     }
 
 
-    // 全部课程
-    //@Cacheable(key = "'allCourses'", unless = "#result==null")
-    public List<Course> findAll() {
+    /**
+     * 全部课程
+     *
+     * @return
+     */
+    // @Cacheable(key = "'allCourses'", unless = "#result==null")
+    public List<Course> listCourses() {
         return courseMapper.allCourses();
     }
 
 
-    // 搜索相关课程
-    //@Cacheable(key = "#keyword", unless = "#result==null ")
-    public List<Course> search(String keyword) {
+    /**
+     * 搜索相关课程
+     *
+     * @param keyword
+     * @return
+     */
+    // @Cacheable(key = "#keyword", unless = "#result==null ")
+    public List<Course> listSearchCourses(String keyword) {
         return courseMapper.search(keyword);
     }
 
-    // 根据分类获取课程
-    public List<Course> category(String type){
+
+    /**
+     * 根据分类获取课程
+     *
+     * @param type
+     * @return
+     */
+    public List<Course> listCategories(String type) {
         return courseMapper.category(type);
     }
 
 
-    // 课程详情
+    /**
+     * 课程详情
+     *
+     * @param id
+     * @return
+     */
     public List<Detail> getDetail(int id) {
         return courseMapper.getDetail(id);
     }
 
 
-    // 课程详情
-    public List<Chapter> getChapterList(int id) {
+    /**
+     * 课程详情
+     *
+     * @param id
+     * @return
+     */
+    public List<Chapter> listChapters(int id) {
         return courseMapper.getChapter(id);
     }
 
 
-    // 获取视频资源
+    /**
+     * 获取视频资源
+     *
+     * @param course_id
+     * @param chapter_id
+     * @return
+     */
     public Chapter getVideo(int course_id, String chapter_id) {
         return courseMapper.getVideo(course_id, chapter_id);
     }
 
 
-    // 添加课程
-    public int addCourse(Course course) {
+    /**
+     * 添加课程
+     *
+     * @param course
+     * @return
+     */
+    public int insertCourse(Course course) {
         String title = course.getTitle();
         String info = course.getInfo();
         int hour = course.getHour();
-        log.info("title:" + title + "info:" + info + "hour:" + hour);
 
         return courseMapper.addCourse(title, info, hour);
     }
 
 
-    // 删除课程
-    public void delCouse(int courseID) {
+    /**
+     * 删除课程
+     *
+     * @param courseID
+     */
+    public void deleteCourse(int courseID) {
         courseMapper.delCourse(courseID);
     }
 

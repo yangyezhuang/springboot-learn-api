@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
+ */
 @Slf4j
 @Service
 public class MailService {
@@ -96,7 +100,7 @@ public class MailService {
             String phoneNum = user.getPhoneNum();
             log.info("注册用户：" + uid + "," + username + "," + password + "," + phoneNum + "," + email);
 
-            userService.addUser(user);
+            userService.insertUser(user);
             return Result.success("注册成功");
         }
         return Result.failure(ResultCode.FAILURE, "用户已存在");

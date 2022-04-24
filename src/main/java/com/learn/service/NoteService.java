@@ -10,9 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Description: TODO
- * @Date: 2022/4/7 13:59
- * @Author: Yang Yezhuang
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @Service
 public class NoteService {
@@ -20,10 +19,17 @@ public class NoteService {
     @Autowired
     private NoteMapper noteMapper;
 
-    public int addNote(Note note) {
+    /**
+     * 添加笔记
+     *
+     * @param note
+     * @return
+     */
+    public int insertNote(Note note) {
         int uid = note.getUid();
         String notes = note.getNote();
-        long note_id = System.currentTimeMillis() / 1000; // 10位数的时间戳
+        // 10位数的时间戳
+        long note_id = System.currentTimeMillis() / 1000;
 
         // 生成时间
         String time = "";
@@ -34,15 +40,34 @@ public class NoteService {
         return noteMapper.insert(note_id, uid, notes, time);
     }
 
-    public int delNote(Long note_id) {
+
+    /**
+     * 删除笔记
+     *
+     * @param note_id
+     * @return
+     */
+    public int deleteNote(Long note_id) {
         return noteMapper.delete(note_id);
     }
 
+
+    /**
+     * @param uid
+     * @return
+     */
     public List<Note> selectNote(int uid) {
         return noteMapper.queryAll(uid);
     }
 
-    public int noteCount(int uid) {
+
+    /**
+     * 统计笔记总数
+     *
+     * @param uid
+     * @return
+     */
+    public int countNotes(int uid) {
         return noteMapper.noteCount(uid);
     }
 }

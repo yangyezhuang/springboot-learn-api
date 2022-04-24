@@ -8,19 +8,29 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @Description: TODO
- * @Date: 2022/4/12 13:17
- * @Author: Yang Yezhuang
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @Service
 public class TeacherInfoService {
     @Autowired
     TeacherInfoMapper teacherInfoMapper;
 
-    public List<TeacherInfo> queryAll() {
+    /**
+     * 获取全部教师信息
+     *
+     * @return
+     */
+    public List<TeacherInfo> listTeacherInfo() {
         return teacherInfoMapper.queryAll();
     }
 
+    /**
+     * 获取指定教师信息
+     *
+     * @param uid
+     * @return
+     */
     public TeacherInfo queryById(Long uid) {
         return teacherInfoMapper.queryById(uid);
     }

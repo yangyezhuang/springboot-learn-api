@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @Description: UserController
- * @Date: 2022/3/13 17:31
- * @Created: by yyz
+ * @author: Yang Yezhuang
+ * @date: 2022/3/13
  */
 @Slf4j
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -28,20 +27,15 @@ public class UserController {
     @Autowired
     StringRedisTemplate stringRedisTemplate;
 
-    @GetMapping("/a")
-    public String a(){
-        return "a";
-    }
 
     /**
      * 查询所有用户
      *
      * @return
      */
-    @GetMapping("/all")
+    @GetMapping()
     public List<User> allUsers() {
-        List<User> users = userService.allUsers();
-        //log.info("全部用户：" + users);
+        List<User> users = userService.listUsers();
 
         return users;
     }
@@ -52,10 +46,9 @@ public class UserController {
      *
      * @return
      */
-    @PostMapping("/add")
+    @PostMapping()
     public Result addUser(@RequestBody User user) {
-
-        return userService.addUser(user);
+        return userService.insertUser(user);
     }
 
 
@@ -65,12 +58,9 @@ public class UserController {
      * @param uid
      * @return
      */
-    @PostMapping("/del/{uid}")
-    public String delUser(@PathVariable("uid") int uid) {
-        //log.info("删除id为" + uid + "的用户");
-
-        userService.delUser(uid);
-        return "删除成功";
+    @DeleteMapping("/{uid}")
+    public int delUser(@PathVariable("uid") int uid) {
+       return userService.deleteUser(uid);
     }
 
 
@@ -85,7 +75,6 @@ public class UserController {
     public Result changeState(@PathVariable("userId") int id,
                               @PathVariable("status") boolean status) {
         userService.updateUserStatus(status, id);
-        //log.info("id：" + id + "\t状态：" + status);
 
         return Result.success(ResultCode.SUCCESS);
     }
@@ -96,10 +85,9 @@ public class UserController {
      *
      * @return
      */
-    @GetMapping("info/{uid}")
+    @GetMapping("/{uid}")
     public User getUserInfo(@PathVariable("uid") int uid) {
         User userInfo = userService.getUserInfo(uid);
-        //log.info("用户信息：" + userInfo);
 
         return userInfo;
     }
@@ -111,10 +99,9 @@ public class UserController {
      * @param uid
      * @return
      */
-    @GetMapping("/courses/{uid}")
+    @GetMapping("/{uid}/courses")
     public List<Course> likes(@PathVariable("uid") int uid) {
-        List<Course> likes = userService.userCourse(uid);
-        //log.info("用户:" + uid + "\t收藏课程：" + likes);
+        List<Course> likes = userService.listUserLikeCourse(uid);
 
         return likes;
     }
@@ -124,24 +111,23 @@ public class UserController {
      */
     @GetMapping("/course/total/{uid}")
     public int courseTotal(@PathVariable("uid") int uid) {
-        return userService.courseTotal(uid);
+        return userService.countCourses(uid);
     }
 
 
     /**
-     * 添加收藏(待完善)
+     * 添加收藏
      *
      * @param uid
-     * @param course_id
+     * @param courseId
      * @return
      */
     @PostMapping("/{uid}/addCourse/{course_id}")
     public Result userAddCourse(@PathVariable("uid") int uid,
-                                @PathVariable("course_id") int course_id) {
-        int total = userService.isLike(uid, course_id);
+                                @PathVariable("course_id") int courseId) {
+        int total = userService.isLike(uid, courseId);
         if (total == 0) {
-            userService.userAddCourse(uid, course_id);
-            //log.info("用户：" + uid + " 收藏课程：" + course_id);
+            userService.userAddCourse(uid, courseId);
             return Result.success(ResultCode.SUCCESS);
         } else {
             return Result.failure(ResultCode.FAILURE);
@@ -159,7 +145,6 @@ public class UserController {
     @DeleteMapping("{uid}/course/{course_id}")
     public int userDelCourse(@PathVariable("uid") int uid,
                              @PathVariable("course_id") int course_id) {
-        //log.info("用户：" + uid + "，取消收藏：" + course_id);
 
         return userService.userDelCourse(uid, course_id);
     }
